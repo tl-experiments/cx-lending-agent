@@ -1,0 +1,30 @@
+{
+  "app": {
+    "loggingSettings": {
+      "bigqueryExportSettings": {
+        "project": "gcex-pilot-16862",
+        "dataset": "tilicho_cx_insights"
+      }
+    }
+  },
+  "tools": {
+    "policy_kb": {
+      "fileSearchTool": {
+        "fileCorpus": "projects/804472053350/locations/us-central1/ragCorpora/6713371708595634176"
+      }
+    }
+  },
+  "toolsets": {
+    "Servicing API": {
+      "openApiToolset": {
+        "apiAuthentication": {
+          "apiKeyConfig": {
+            "keyName": "X-API-Key",
+            "apiKeySecretVersion": "projects/804472053350/secrets/tilicho-backend-api-key/versions/latest"
+          }
+        },
+        "url": "https://tilicho-credit-api-804472053350.us-central1.run.app"
+      }
+    }
+  }
+}

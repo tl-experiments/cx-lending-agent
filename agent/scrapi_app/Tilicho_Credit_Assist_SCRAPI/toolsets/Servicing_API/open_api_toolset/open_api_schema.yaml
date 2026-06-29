@@ -1,0 +1,132 @@
+# OpenAPI 3.0.3 spec for the CX Agent Studio / Dialogflow CX OpenAPI tool.
+# IMPORTANT: the agent tool importer requires 3.0.x (FastAPI's auto /openapi.json is
+# 3.1.0 and may be rejected). This hand-authored spec mirrors backend/app.py.
+# Swap `servers.url` to the Cloud Run URL after Phase 1 deploy.
+openapi: 3.0.3
+info:
+  title: Tilicho Credit Servicing API
+  description: Synthetic loan-servicing API for the GCEX POC. PII-safe demo data.
+  version: 1.0.0
+servers:
+  - url: $env_var
+    description: Cloud Run deployment of the Tilicho Credit servicing API
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+security:
+  - ApiKeyAuth: []
+paths:
+  /accounts/{loan_id}:
+    get:
+      operationId: getAccountSummary
+      summary: Get a borrower's loan account summary (balance, EMI, next due date, status).
+      parameters:
+        - name: loan_id
+          in: path
+          required: true
+          description: Loan reference, e.g. TL-1001
+          schema:
+            type: string
+        - name: phone_last4
+          in: query
+          required: true
+          description: Last 4 digits of the borrower's registered phone, for identity verification.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  loan_id: { type: string }
+                  borrower_name: { type: string }
+                  product: { type: string }
+                  status: { type: string }
+                  outstanding_principal: { type: integer }
+                  emi_amount: { type: integer }
+                  next_due_date: { type: string }
+                  interest_rate_apr: { type: number }
+                  emis_paid: { type: integer }
+                  tenure_months: { type: integer }
+                  days_past_due: { type: integer }
+        '403':
+          description: Identity verification failed — loan ID and last-4 phone do not match
+        '404':
+          description: No loan found
+  /accounts/{loan_id}/payoff:
+    get:
+      operationId: getPayoffQuote
+      summary: Get a foreclosure / early-payoff quote for a loan.
+      parameters:
+        - name: loan_id
+          in: path
+          required: true
+          description: Loan reference, e.g. TL-1001
+          schema:
+            type: string
+        - name: phone_last4
+          in: query
+          required: true
+          description: Last 4 digits of the borrower's registered phone, for identity verification.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payoff quote
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  loan_id: { type: string }
+                  outstanding_principal: { type: integer }
+                  foreclosure_charge: { type: integer }
+                  accrued_interest: { type: integer }
+                  total_payoff_amount: { type: integer }
+                  quote_valid_until: { type: string }
+                  notes: { type: string }
+        '403':
+          description: Identity verification failed — loan ID and last-4 phone do not match
+        '404':
+          description: No loan found
+  /tickets:
+    post:
+      operationId: createTicket
+      summary: Raise a servicing ticket (restructuring, complaint, kyc_update, callback).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [loan_id, phone_last4, category, message]
+              properties:
+                loan_id: { type: string }
+                phone_last4: { type: string, description: "Last 4 digits of the registered phone for identity verification" }
+                category:
+                  type: string
+                  description: restructuring | complaint | kyc_update | callback
+                message: { type: string }
+      responses:
+        '200':
+          description: Ticket created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ticket_id: { type: string }
+                  loan_id: { type: string }
+                  category: { type: string }
+                  status: { type: string }
+                  sla_resolution_by: { type: string }
+        '403':
+          description: Identity verification failed — loan ID and last-4 phone do not match
+        '404':
+          description: No loan found

@@ -1,0 +1,7 @@
+{
+  "name": "ffc94fa9-b5c8-401f-8e61-34fb154e5fbf",
+  "displayName": "eval_exp_2fc4cedb",
+  "llmCriteria": {
+    "prompt": "The agent mentions the quote is valid for 7 days."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "credit-assist-lean",
+  "displayName": "Credit Assist Lean",
+  "instruction": "agents/Credit_Assist_Lean/instruction.txt",
+  "tools": ["policy_kb"],
+  "llmAgent": {
+  },
+  "toolsets": [{
+    "toolset": "Servicing API",
+    "toolIds": ["createTicket", "getAccountSummary", "getPayoffQuote"]
+  }]
+}

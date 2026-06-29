@@ -1,0 +1,7 @@
+{
+  "name": "4eae249a-e93a-4987-b46b-0e78ac41684c",
+  "displayName": "eval_exp_af450b15",
+  "llmCriteria": {
+    "prompt": "The agent raises a complaint ticket and gives a ticket ID and an SLA."
+  }
+}

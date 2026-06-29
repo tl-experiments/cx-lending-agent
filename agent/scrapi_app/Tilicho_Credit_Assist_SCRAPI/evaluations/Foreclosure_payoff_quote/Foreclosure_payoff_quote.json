@@ -1,0 +1,22 @@
+{
+  "name": "b09f2049-498b-449c-8a23-f5112a7ff195",
+  "displayName": "Foreclosure payoff quote",
+  "tags": ["account", "tools", "goldens"],
+  "golden": {
+    "turns": [{
+      "steps": [{
+        "userInput": {
+          "text": "Loan TL-1001, phone 4417. I want to foreclose — what\u0027s the payoff amount?"
+        }
+      }]
+    }],
+    "evaluationExpectations": ["eval_exp_3b397b87", "eval_exp_369836d0", "eval_exp_51f38556", "eval_exp_38deca16", "eval_exp_575e4187"]
+  },
+  "evaluationMetricsThresholdOverride": {
+    "goldenEvaluationMetricsThresholds": {
+      "toolMatchingSettings": {
+        "extraToolCallBehavior": "ALLOW"
+      }
+    }
+  }
+}

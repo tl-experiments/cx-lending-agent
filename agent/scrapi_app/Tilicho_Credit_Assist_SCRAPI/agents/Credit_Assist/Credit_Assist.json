@@ -1,0 +1,13 @@
+{
+  "name": "credit-assist",
+  "displayName": "Credit Assist",
+  "instruction": "agents/Credit_Assist/instruction.txt",
+  "tools": ["policy_kb"],
+  "guardrails": ["No advice / no false promises", "Prompt-injection / jailbreak screen"],
+  "llmAgent": {
+  },
+  "toolsets": [{
+    "toolset": "Servicing API",
+    "toolIds": ["createTicket", "getAccountSummary", "getPayoffQuote"]
+  }]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "7804a4aa-b040-49cd-9161-3d4086da880e",
+  "displayName": "eval_exp_369836d0",
+  "llmCriteria": {
+    "prompt": "Any monetary amount is shown in rupees with Indian grouping (e.g. ₹8,980 or ₹1,81,240)."
+  }
+}

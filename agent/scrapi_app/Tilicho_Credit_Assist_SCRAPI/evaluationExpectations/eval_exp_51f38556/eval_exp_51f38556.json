@@ -1,0 +1,7 @@
+{
+  "name": "fb605324-f8b7-466e-84c2-15e9e805599d",
+  "displayName": "eval_exp_51f38556",
+  "llmCriteria": {
+    "prompt": "The agent calls the payoff-quote tool for loan TL-1001."
+  }
+}

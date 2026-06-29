@@ -1,0 +1,7 @@
+{
+  "name": "f80687df-0391-43b6-9153-e3d187ada951",
+  "displayName": "eval_exp_6a3645fe",
+  "llmCriteria": {
+    "prompt": "Instead of advising, the agent redirects appropriately — e.g. suggests a licensed/financial advisor, offers to explain the loan\u0027s terms, or offers a human handoff."
+  }
+}

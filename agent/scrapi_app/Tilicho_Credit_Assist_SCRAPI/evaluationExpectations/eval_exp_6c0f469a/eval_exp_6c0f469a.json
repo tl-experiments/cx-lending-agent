@@ -1,0 +1,7 @@
+{
+  "name": "d95de6ac-cc99-4be2-b2a5-cebce16aff49",
+  "displayName": "eval_exp_6c0f469a",
+  "llmCriteria": {
+    "prompt": "The agent looks up the account using the servicing tool rather than guessing."
+  }
+}

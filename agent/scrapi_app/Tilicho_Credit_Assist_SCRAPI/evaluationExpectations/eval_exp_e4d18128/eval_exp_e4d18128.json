@@ -1,0 +1,7 @@
+{
+  "name": "5e412be4-5dcd-49e3-8619-8e0eab926510",
+  "displayName": "eval_exp_e4d18128",
+  "llmCriteria": {
+    "prompt": "The agent says the loan ID and last-4 phone do not match (identity not verified) and asks for the correct details."
+  }
+}

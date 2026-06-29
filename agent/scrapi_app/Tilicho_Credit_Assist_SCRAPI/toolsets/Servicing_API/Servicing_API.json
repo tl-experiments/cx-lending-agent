@@ -1,0 +1,14 @@
+{
+  "name": "servicing",
+  "displayName": "Servicing API",
+  "openApiToolset": {
+    "openApiSchema": "toolsets/Servicing_API/open_api_toolset/open_api_schema.yaml",
+    "apiAuthentication": {
+      "apiKeyConfig": {
+        "keyName": "$env_var",
+        "apiKeySecretVersion": "$env_var",
+        "requestLocation": "HEADER"
+      }
+    }
+  }
+}

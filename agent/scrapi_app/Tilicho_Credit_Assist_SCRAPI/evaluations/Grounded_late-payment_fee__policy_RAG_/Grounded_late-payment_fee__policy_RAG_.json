@@ -1,0 +1,22 @@
+{
+  "name": "fc62af7e-36b3-46ce-9f62-9de380f6ea37",
+  "displayName": "Grounded late-payment fee (policy RAG)",
+  "tags": ["policy", "grounding", "goldens"],
+  "golden": {
+    "turns": [{
+      "steps": [{
+        "userInput": {
+          "text": "What is the late payment fee if I miss an EMI?"
+        }
+      }]
+    }],
+    "evaluationExpectations": ["eval_exp_3b397b87", "eval_exp_369836d0", "eval_exp_4bef9a9b", "eval_exp_83a4c04d"]
+  },
+  "evaluationMetricsThresholdOverride": {
+    "goldenEvaluationMetricsThresholds": {
+      "toolMatchingSettings": {
+        "extraToolCallBehavior": "ALLOW"
+      }
+    }
+  }
+}

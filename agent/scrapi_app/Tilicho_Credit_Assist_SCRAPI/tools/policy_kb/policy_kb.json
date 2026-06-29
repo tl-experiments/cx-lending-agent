@@ -1,0 +1,10 @@
+{
+  "name": "policy-rag",
+  "displayName": "policy_kb",
+  "fileSearchTool": {
+    "corpusType": "USER_OWNED",
+    "name": "policy_kb",
+    "description": "Grounded answers from Tilicho loan policies, FAQ, fair-practice \u0026 grievance docs.",
+    "fileCorpus": "$env_var"
+  }
+}

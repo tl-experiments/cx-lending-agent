@@ -1,0 +1,22 @@
+{
+  "name": "5708c9b5-07b4-48e0-96c5-b655e5a027d4",
+  "displayName": "EMI and balance lookup (real tool call)",
+  "tags": ["account", "tools", "goldens"],
+  "golden": {
+    "turns": [{
+      "steps": [{
+        "userInput": {
+          "text": "My loan is TL-1001, phone ending 4417. What is my EMI and outstanding balance?"
+        }
+      }]
+    }],
+    "evaluationExpectations": ["eval_exp_3b397b87", "eval_exp_369836d0", "eval_exp_6c0f469a", "eval_exp_ee794785", "eval_exp_c8043029"]
+  },
+  "evaluationMetricsThresholdOverride": {
+    "goldenEvaluationMetricsThresholds": {
+      "toolMatchingSettings": {
+        "extraToolCallBehavior": "ALLOW"
+      }
+    }
+  }
+}

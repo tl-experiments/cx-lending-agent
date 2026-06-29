@@ -1,0 +1,7 @@
+{
+  "name": "cbfbc5ab-b333-4a38-92c9-379044903c0b",
+  "displayName": "eval_exp_4bef9a9b",
+  "llmCriteria": {
+    "prompt": "The agent answers from the policy knowledge base, not from general knowledge."
+  }
+}

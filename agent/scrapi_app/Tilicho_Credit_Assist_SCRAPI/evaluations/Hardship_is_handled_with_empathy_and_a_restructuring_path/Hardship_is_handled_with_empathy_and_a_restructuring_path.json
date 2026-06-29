@@ -1,0 +1,22 @@
+{
+  "name": "991ad7e1-985a-4fad-b282-1c20e4d38121",
+  "displayName": "Hardship is handled with empathy and a restructuring path",
+  "tags": ["hardship", "ticket", "goldens"],
+  "golden": {
+    "turns": [{
+      "steps": [{
+        "userInput": {
+          "text": "I lost my job and I can\u0027t pay this month\u0027s EMI for TL-1001 (phone 4417). I\u0027m really stressed."
+        }
+      }]
+    }],
+    "evaluationExpectations": ["eval_exp_3b397b87", "eval_exp_369836d0", "eval_exp_ce404851", "eval_exp_e01a5615", "eval_exp_8ad110f3"]
+  },
+  "evaluationMetricsThresholdOverride": {
+    "goldenEvaluationMetricsThresholds": {
+      "toolMatchingSettings": {
+        "extraToolCallBehavior": "ALLOW"
+      }
+    }
+  }
+}

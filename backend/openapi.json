@@ -1,0 +1,584 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Tilicho Credit Servicing API",
+    "description": "Synthetic loan-servicing API for the GCEX POC. PII-safe demo data.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local mock"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{loan_id}": {
+      "get": {
+        "summary": "Get Account",
+        "description": "Look up a borrower's loan account: balance, EMI, next due date, status.",
+        "operationId": "getAccountSummary",
+        "parameters": [
+          {
+            "name": "loan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Loan Id"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountSummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{loan_id}/payoff": {
+      "get": {
+        "summary": "Get Payoff",
+        "description": "Compute a foreclosure / early-payoff quote for a loan.",
+        "operationId": "getPayoffQuote",
+        "parameters": [
+          {
+            "name": "loan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Loan Id"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoffQuote"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tickets": {
+      "post": {
+        "summary": "Create Ticket",
+        "description": "Raise a servicing ticket: restructuring, complaint, KYC update, or callback.",
+        "operationId": "createTicket",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Api-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat": {
+      "post": {
+        "summary": "Chat",
+        "description": "Relay a user turn to the CES agent and return its reply + transparency signals.",
+        "operationId": "chat_chat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Chat Ui",
+        "operationId": "chat_ui__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ui": {
+      "get": {
+        "summary": "Chat Ui",
+        "operationId": "chat_ui_ui_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insights/data": {
+      "get": {
+        "summary": "Insights Data",
+        "operationId": "insights_data_insights_data_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insights": {
+      "get": {
+        "summary": "Insights Ui",
+        "operationId": "insights_ui_insights_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountSummary": {
+        "properties": {
+          "loan_id": {
+            "type": "string",
+            "title": "Loan Id"
+          },
+          "borrower_name": {
+            "type": "string",
+            "title": "Borrower Name"
+          },
+          "product": {
+            "type": "string",
+            "title": "Product"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "outstanding_principal": {
+            "type": "integer",
+            "title": "Outstanding Principal",
+            "description": "Current principal owed, in INR"
+          },
+          "outstanding_principal_display": {
+            "type": "string",
+            "title": "Outstanding Principal Display",
+            "description": "Outstanding principal, formatted e.g. \u20b91,81,240"
+          },
+          "emi_amount": {
+            "type": "integer",
+            "title": "Emi Amount",
+            "description": "Monthly instalment, in INR"
+          },
+          "emi_amount_display": {
+            "type": "string",
+            "title": "Emi Amount Display",
+            "description": "EMI, formatted e.g. \u20b98,980"
+          },
+          "next_due_date": {
+            "type": "string",
+            "title": "Next Due Date",
+            "description": "Next EMI due date, YYYY-MM-DD"
+          },
+          "interest_rate_apr": {
+            "type": "number",
+            "title": "Interest Rate Apr"
+          },
+          "emis_paid": {
+            "type": "integer",
+            "title": "Emis Paid"
+          },
+          "tenure_months": {
+            "type": "integer",
+            "title": "Tenure Months"
+          },
+          "days_past_due": {
+            "type": "integer",
+            "title": "Days Past Due"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loan_id",
+          "borrower_name",
+          "product",
+          "status",
+          "outstanding_principal",
+          "outstanding_principal_display",
+          "emi_amount",
+          "emi_amount_display",
+          "next_due_date",
+          "interest_rate_apr",
+          "emis_paid",
+          "tenure_months",
+          "days_past_due"
+        ],
+        "title": "AccountSummary"
+      },
+      "ChatRequest": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id",
+            "default": "web-demo"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "ChatRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PayoffQuote": {
+        "properties": {
+          "loan_id": {
+            "type": "string",
+            "title": "Loan Id"
+          },
+          "outstanding_principal": {
+            "type": "integer",
+            "title": "Outstanding Principal"
+          },
+          "outstanding_principal_display": {
+            "type": "string",
+            "title": "Outstanding Principal Display"
+          },
+          "foreclosure_charge": {
+            "type": "integer",
+            "title": "Foreclosure Charge",
+            "description": "Charge to close early, in INR"
+          },
+          "foreclosure_charge_display": {
+            "type": "string",
+            "title": "Foreclosure Charge Display"
+          },
+          "accrued_interest": {
+            "type": "integer",
+            "title": "Accrued Interest"
+          },
+          "accrued_interest_display": {
+            "type": "string",
+            "title": "Accrued Interest Display"
+          },
+          "total_payoff_amount": {
+            "type": "integer",
+            "title": "Total Payoff Amount",
+            "description": "Total to fully close the loan today, INR"
+          },
+          "total_payoff_amount_display": {
+            "type": "string",
+            "title": "Total Payoff Amount Display",
+            "description": "Total payoff, formatted e.g. \u20b91,87,357"
+          },
+          "quote_valid_until": {
+            "type": "string",
+            "title": "Quote Valid Until"
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loan_id",
+          "outstanding_principal",
+          "outstanding_principal_display",
+          "foreclosure_charge",
+          "foreclosure_charge_display",
+          "accrued_interest",
+          "accrued_interest_display",
+          "total_payoff_amount",
+          "total_payoff_amount_display",
+          "quote_valid_until",
+          "notes"
+        ],
+        "title": "PayoffQuote"
+      },
+      "TicketRequest": {
+        "properties": {
+          "loan_id": {
+            "type": "string",
+            "title": "Loan Id"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "e.g. restructuring, complaint, kyc_update, callback"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loan_id",
+          "category",
+          "message"
+        ],
+        "title": "TicketRequest"
+      },
+      "TicketResponse": {
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "title": "Ticket Id"
+          },
+          "loan_id": {
+            "type": "string",
+            "title": "Loan Id"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "sla_resolution_by": {
+            "type": "string",
+            "title": "Sla Resolution By"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ticket_id",
+          "loan_id",
+          "category",
+          "status",
+          "sla_resolution_by"
+        ],
+        "title": "TicketResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

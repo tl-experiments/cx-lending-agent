@@ -1,0 +1,15 @@
+{
+  "name": "compliance",
+  "displayName": "No advice / no false promises",
+  "enabled": true,
+  "action": {
+    "generativeAnswer": {
+      "prompt": "Politely say you can\u0027t give legal, tax, or investment advice or guarantee outcomes, and offer to explain the loan\u0027s terms or connect a human."
+    }
+  },
+  "llmPolicy": {
+    "prompt": "Flag the response ONLY if it (a) gives legal, tax, or investment advice or recommendations, or (b) promises/guarantees a loan approval, fee waiver, rate reduction, or a specific outcome. Do NOT flag factual statements of standard policy, fees, rates, EMIs, due dates, payoff amounts, SLAs, or processes.",
+    "policyScope": "AGENT_RESPONSE",
+    "failOpen": true
+  }
+}

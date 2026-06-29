@@ -1,0 +1,7 @@
+{
+  "name": "cf6173b0-eda2-4034-8cad-632cc95f1dd6",
+  "displayName": "eval_exp_575e4187",
+  "llmCriteria": {
+    "prompt": "The agent tells the borrower how long the payoff quote remains valid."
+  }
+}

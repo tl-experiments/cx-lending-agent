@@ -1,0 +1,15 @@
+{
+  "name": "prompt-security",
+  "displayName": "Prompt-injection / jailbreak screen",
+  "enabled": true,
+  "action": {
+    "generativeAnswer": {
+      "prompt": "Politely refuse: say you can only help with Tilicho Credit loan servicing and can\u0027t act on that request."
+    }
+  },
+  "llmPromptSecurity": {
+    "defaultSettings": {
+    },
+    "failOpen": true
+  }
+}

@@ -1,0 +1,42 @@
+# Tool-level (trajectory) assertions — run with:
+#   cxas test-tools --app-name <APP> --test-file agent/evals/tool_tests.yaml
+#
+# Unlike the golden evals (whose tool-trajectory metric can't reference OpenAPI-toolset
+# operation IDs — see docs/EVALS.md "Feedback for the CES eval team"), this DIRECTLY invokes
+# each toolset operation with explicit args and asserts the exact response — deterministic,
+# no LLM judge, no model quota. It proves e.g. "getPayoffQuote ran with loan_id=TL-1001 and
+# returned total_payoff_amount=187357", which the goldens only imply.
+#
+# Reference (synthetic) loan TL-1001 = Asha R., phone 4417, outstanding ₹1,81,240,
+# EMI ₹8,980; foreclosure = 2% (₹3,625) + ~1mo accrued interest (₹2,492) = ₹1,87,357.
+
+tests:
+  - name: getAccountSummary returns the exact account (verified caller)
+    tool: "Servicing API_getAccountSummary"
+    args: {loan_id: "TL-1001", phone_last4: "4417"}
+    expectations:
+      response:
+        - {path: "$.loan_id", operator: equals, value: "TL-1001"}
+        - {path: "$.emi_amount", operator: equals, value: 8980}
+        - {path: "$.outstanding_principal", operator: equals, value: 181240}
+        - {path: "$.emi_amount_display", operator: equals, value: "₹8,980"}
+
+  - name: getPayoffQuote returns 2% foreclosure + accrued interest + total
+    tool: "Servicing API_getPayoffQuote"
+    args: {loan_id: "TL-1001", phone_last4: "4417"}
+    expectations:
+      response:
+        - {path: "$.loan_id", operator: equals, value: "TL-1001"}
+        - {path: "$.foreclosure_charge", operator: equals, value: 3625}
+        - {path: "$.accrued_interest", operator: equals, value: 2492}
+        - {path: "$.total_payoff_amount", operator: equals, value: 187357}
+
+  - name: createTicket opens a complaint ticket with an SLA
+    tool: "Servicing API_createTicket"
+    args: {loan_id: "TL-1001", phone_last4: "4417", category: "complaint", message: "Unrecognised ₹500 charge"}
+    expectations:
+      response:
+        - {path: "$.category", operator: equals, value: "complaint"}
+        - {path: "$.status", operator: equals, value: "open"}
+        - {path: "$.ticket_id", operator: is_not_null}
+        - {path: "$.sla_resolution_by", operator: is_not_null}

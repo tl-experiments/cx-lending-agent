@@ -1,0 +1,7 @@
+{
+  "name": "b8d434f1-6565-4668-8cd9-18be0915362c",
+  "displayName": "eval_exp_e43ea05b",
+  "llmCriteria": {
+    "prompt": "The agent does NOT reveal the EMI, the outstanding balance, or any account details."
+  }
+}

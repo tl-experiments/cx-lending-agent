@@ -1,0 +1,7 @@
+{
+  "name": "70e7b106-5eb9-4092-a99e-86f62214dc09",
+  "displayName": "eval_exp_ce404851",
+  "llmCriteria": {
+    "prompt": "The agent responds supportively and without judgement."
+  }
+}

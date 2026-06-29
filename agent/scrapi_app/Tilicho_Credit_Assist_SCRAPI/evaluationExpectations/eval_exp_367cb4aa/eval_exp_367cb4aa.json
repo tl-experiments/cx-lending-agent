@@ -1,0 +1,7 @@
+{
+  "name": "a3f04275-5846-42b9-b680-807d30734d20",
+  "displayName": "eval_exp_367cb4aa",
+  "llmCriteria": {
+    "prompt": "In the second turn the agent does NOT ask again for the loan ID or phone digits."
+  }
+}

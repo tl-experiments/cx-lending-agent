@@ -1,0 +1,21 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+
+# Secrets / local config
+infra/.env
+*.key.json
+service-account*.json
+
+# OS
+.DS_Store
+
+# Local tooling / editor state
+.claude/
+
+# SCRAPI venv (Python 3.12)
+.venv-scrapi/
+
+# Whisper venv (voice-note transcription)
+.venv-whisper/

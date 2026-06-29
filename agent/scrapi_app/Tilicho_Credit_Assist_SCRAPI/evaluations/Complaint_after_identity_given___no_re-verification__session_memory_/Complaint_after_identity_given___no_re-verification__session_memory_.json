@@ -1,0 +1,34 @@
+{
+  "name": "05d7e7ff-992c-4b45-96d2-46242b12fd36",
+  "displayName": "Complaint after identity given — no re-verification (session memory)",
+  "tags": ["memory", "ticket", "goldens"],
+  "golden": {
+    "turns": [{
+      "steps": [{
+        "userInput": {
+          "text": "My loan is TL-1001, phone 4417. What\u0027s my next due date?"
+        }
+      }]
+    }, {
+      "steps": [{
+        "userInput": {
+          "text": "Thanks. I also want to raise a complaint about a wrong charge on my account."
+        }
+      }]
+    }, {
+      "steps": [{
+        "userInput": {
+          "text": "It\u0027s a ₹500 charge from last month that I don\u0027t recognise."
+        }
+      }]
+    }],
+    "evaluationExpectations": ["eval_exp_3b397b87", "eval_exp_369836d0", "eval_exp_d106ef13", "eval_exp_af450b15"]
+  },
+  "evaluationMetricsThresholdOverride": {
+    "goldenEvaluationMetricsThresholds": {
+      "toolMatchingSettings": {
+        "extraToolCallBehavior": "ALLOW"
+      }
+    }
+  }
+}

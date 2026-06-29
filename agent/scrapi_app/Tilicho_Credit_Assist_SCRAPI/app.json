@@ -1,0 +1,22 @@
+{
+  "name": "tilicho-credit-scrapi",
+  "displayName": "Tilicho Credit Assist SCRAPI",
+  "description": "Lending CX agent (built with CXAS SCRAPI).",
+  "rootAgent": "Credit Assist",
+  "loggingSettings": {
+    "bigqueryExportSettings": {
+      "enabled": true,
+      "project": "$env_var",
+      "dataset": "$env_var"
+    },
+    "cloudLoggingSettings": {
+      "enableCloudLogging": true
+    },
+    "conversationLoggingSettings": {
+      "retentionWindow": "2592000s"
+    }
+  },
+  "timeZoneSettings": {
+    "timeZone": "America/Los_Angeles"
+  }
+}
